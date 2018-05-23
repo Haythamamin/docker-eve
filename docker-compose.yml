@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  eve:
+    build: .
+    restart: unless-stopped
+    environment:
+      - MONGO_URI=mongodb://mongo/db
+    ports:
+      - 5000:5000
+    volumes:
+      - ./example.settings.py:/usr/src/app/settings.py
+
+  mongo:
+    image: mongo:3.6
+    restart: unless-stopped
+    ports:
+      - 27018:27017
+    volumes:
+      - ./mongo:/data/db
